@@ -12,6 +12,9 @@
     "url": "git+https://github.com/jstiltner/evernode.git"
   },
   "eslintConfig": {
+    "globals": {
+      "res": true
+    },
     "env": {
       "mocha": true,
       "node": true,
