@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+
 const note = require('./routes/note');
+const logger = require('./lib/logger');
+const category = require('./routes/categories');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,12 +19,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(methodOverride('_method'));
+app.use(logger);
 
 app.get('/', (req, res) => {
   res.send('Server Running');
 });
 
 app.use(note);
+app.use(category);
 
 mongoose.connect('mongodb://localhost:27017/evernode', (err) => {
   if (err) throw err;
